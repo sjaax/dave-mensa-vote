@@ -48,8 +48,8 @@
         document.querySelectorAll('.mood-button').forEach(button => {
             button.addEventListener('click', () => {
                 const counterName = button.id;
-                const url = `https://api.countapi.xyz/hit/mensa-dave/${counterName}`;
-                fetch(url, { method: 'POST' })
+                const url = `https://api.counterapi.dev/v1/mensa-dave/${counterName}/up`;
+                fetch(url, { method: 'GET' })
                     .then(response => response.json())
                     .then(data => console.log(`${counterName} counter updated:`, data))
                     .catch(error => console.error('Error updating counter:', error));

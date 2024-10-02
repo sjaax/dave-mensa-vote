@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Counter</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mood-button {
+            padding: 10px 20px;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #super-happy { background-color: green; }
+        #happy { background-color: yellow; }
+        #neutral { background-color: orange; }
+        #sad { background-color: red; }
+
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button id="super-happy" class="mood-button">😄</button>
+        <button id="happy" class="mood-button">🙂</button>
+        <button id="neutral" class="mood-button">😐</button>
+        <button id="sad" class="mood-button">🙁</button>
+    </div>
+    <script>
+        document.querySelectorAll('.mood-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const counterName = button.id;
+                const url = `https://api.countapi.xyz/hit/mensa-dave/${counterName}`;
+                fetch(url, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => console.log(`${counterName} counter updated:`, data))
+                    .catch(error => console.error('Error updating counter:', error));
+            });
+        });
+    </script>
+</body>
+</html>
